@@ -2,12 +2,27 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  SafeAreaView
 } from "react-native";
 //Material Tab Bar
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import {createMaterialTopTabNavigator} from 'react-navigation';
 //Platform Specific Icons
 import Icon from 'react-native-vector-icons/Ionicons'
+
+export default class App extends Component {
+  render() {
+    return (
+      <SafeAreaView style={{
+        flex: 1, backgroundColor: '#f2f2f2'
+      }}>
+
+        <TabNavigator />
+      </SafeAreaView>
+    )
+  }
+}
+
 
 //Home Screen
 class HomeScreen extends Component {
@@ -32,7 +47,7 @@ class SettingsScreen extends Component {
 }
 
 //Create bottom Tabs
-export default createMaterialBottomTabNavigator({
+const TabNavigator = createMaterialTopTabNavigator({
   Home: {
     screen: HomeScreen, //Screen name
     navigationOptions: {
@@ -54,10 +69,20 @@ export default createMaterialBottomTabNavigator({
     }
   }
 }, {
-    initialRouteName: 'Home',
-    activeTintColor: 'white',
-    shifting: true
-  })
+  initialRouteName: 'Home',
+  // order: ['Settings', 'Home'],
+  tabBarOptions: {
+    activeTintColor: 'blue',
+    inactiveTintColor: 'grey',
+    style: {
+      backgroundColor: '#f2f2f2'
+    },
+    indicatorStyle: {
+      height: 0
+    },
+    showIcon: true
+  }
+})
 
 const styles = StyleSheet.create({
   container: {
