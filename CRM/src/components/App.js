@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
-import { StyleSheet, View} from 'react-native'
+import {StyleSheet, View} from 'react-native'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
 import firebase from 'firebase'
 import Login from './Login'
 import PeopleList from './PeopleList'
-import Loader from './Loader';
+import Loader from './Loader'
+import reducers from '../reducers/PeopleReducers'
+
+const store = createStore(reducers)
 
 export default class App extends Component{
 
@@ -11,7 +16,6 @@ export default class App extends Component{
 
   componentWillMount(){
     firebase.initializeApp({
-
     })
 
     firebase.auth().onAuthStateChanged((user)=>{
@@ -35,9 +39,11 @@ export default class App extends Component{
   }
   render() {
     return (
-      <View style={styles.container}>
+      <Provider store={store}>
+        <View style={styles.container}>
        {this.renderInitialView()}
       </View>
+      </Provider>
     )
   }
 }

@@ -11,7 +11,6 @@ export default class App extends Component{
 
   componentWillMount(){
     firebase.initializeApp({
-      
     })
 
     firebase.auth().onAuthStateChanged((user)=>{
